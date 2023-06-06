@@ -1,4 +1,4 @@
-package hoony.bulletinboard.controller;
+package hoony.bulletinboard.member.controller;
 
 public class MemberForm {
     // DTO

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/">메인 페이지</a> <a href="/boards/new">글 쓰기</a>
+<br><br>
+
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>글쓴이</th>
+                <th>글제목</th>
+                <th>내용</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="articles : ${articles}">
+                <!--                <td th:text="${member.id}"></td>-->
+                <td th:text="${articles.getWriter()}"></td>
+                <td th:text="${articles.getTitle()}"></td>
+                <td th:text="${articles.getText()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div> <!-- /container -->
+
+
+
+</body>
+</html>

@@ -1,9 +1,8 @@
 package hoony.bulletinboard.service;
 
-import hoony.bulletinboard.domain.Member;
-import hoony.bulletinboard.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
+import hoony.bulletinboard.member.domain.Member;
+import hoony.bulletinboard.member.repository.MemoryMemberRepository;
+import hoony.bulletinboard.member.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

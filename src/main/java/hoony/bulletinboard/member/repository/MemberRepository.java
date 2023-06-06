@@ -1,6 +1,6 @@
-package hoony.bulletinboard.repository;
+package hoony.bulletinboard.member.repository;
 
-import hoony.bulletinboard.domain.Member;
+import hoony.bulletinboard.member.domain.Member;
 
 import java.util.List;
 import java.util.Optional;

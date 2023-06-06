@@ -1,6 +1,6 @@
-package hoony.bulletinboard.repository;
+package hoony.bulletinboard.member.repository;
 
-import hoony.bulletinboard.domain.Member;
+import hoony.bulletinboard.member.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

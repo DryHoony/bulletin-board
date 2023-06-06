@@ -1,9 +1,5 @@
 package hoony.bulletinboard;
 
-import hoony.bulletinboard.repository.MemberRepository;
-import hoony.bulletinboard.repository.MemoryMemberRepository;
-import hoony.bulletinboard.service.MemberService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

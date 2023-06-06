@@ -1,8 +1,7 @@
-package hoony.bulletinboard.service;
+package hoony.bulletinboard.member.service;
 
-import hoony.bulletinboard.domain.Member;
-import hoony.bulletinboard.repository.MemberRepository;
-import hoony.bulletinboard.repository.MemoryMemberRepository;
+import hoony.bulletinboard.member.domain.Member;
+import hoony.bulletinboard.member.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class MemberService {
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
 
-        // 자동가입 a/0000
+        // 자동가입 a/0000 테스트용
         Member member0 = new Member("a", "0000");
         memberRepository.save(member0);
     }

@@ -1,4 +1,4 @@
-package hoony.bulletinboard.domain;
+package hoony.bulletinboard.member.domain;
 
 public class MemberLogin {
 

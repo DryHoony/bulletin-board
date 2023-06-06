@@ -1,7 +1,7 @@
 package hoony.bulletinboard.repository;
 
-import hoony.bulletinboard.domain.Member;
-import org.assertj.core.api.Assertions;
+import hoony.bulletinboard.member.domain.Member;
+import hoony.bulletinboard.member.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
