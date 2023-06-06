@@ -1,14 +1,18 @@
 package hoony.bulletinboard.controller;
 
 import hoony.bulletinboard.domain.Member;
+import hoony.bulletinboard.domain.MemberLogin;
 import hoony.bulletinboard.service.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 public class MemberController {
 
@@ -68,8 +72,21 @@ public class MemberController {
 
     @PostMapping(value = "/members/login")
     public String login(@ModelAttribute MemberForm form) { // 따로 DTO 필요할까? - 보안문제 등이 있는지 확인, 로그인 기능 업그레이드시 수정
+        Member member = new Member(form.getName(), form.getPassword());
+        boolean loginFlag = memberService.login(member);
 
+
+        if (loginFlag){
+//            System.out.println("로그인 성공!");
+            log.info("로그인 성공");
+            return "redirect:/?loginName="+member.getName();
+        }
+
+        System.out.println("로그인 실패!");
         return "redirect:/"; // 메인 페이지로
+
+//        ra.addAttribute("memberLogin", memberLogin); // 데이터를 어떻게 보내야 할까?
+
     }
 
 

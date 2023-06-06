@@ -21,6 +21,10 @@ public class MemberService {
     @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
+
+        // 자동가입 a/0000
+        Member member0 = new Member("a", "0000");
+        memberRepository.save(member0);
     }
 
     // 회원가입
