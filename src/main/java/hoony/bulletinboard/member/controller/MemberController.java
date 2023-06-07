@@ -109,6 +109,50 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @GetMapping(value = "/members/edit")
+    public String editMemberForm(@CookieValue(name = "loginName") String loginName, Model model){
+        // Cookie에 loginName 이 없으면 에러 - 400
+
+        // model 에 name 값을 담아서 비밀번호만 수정하도록 변경
+        model.addAttribute("loginName", loginName);
+        return "members/editForm";
+    }
+
+    @PostMapping(value = "/members/edit")
+    public String editMember(@CookieValue(name = "loginName") String loginName,
+                             @RequestParam String password,
+                             HttpServletResponse response){
+
+//        System.out.println("Controller 에서 받은 password = " + password);
+
+        Member member = new Member(loginName, password);
+        memberService.modifyPassword(member);
+
+        // 세션만료 - 다시 로그인
+        Cookie nameCookie = new Cookie("loginName", null);
+        nameCookie.setMaxAge(0);
+        nameCookie.setPath("/");
+        response.addCookie(nameCookie);
+
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/members/delete")
+    public String deleteMember(@CookieValue(name = "loginName") String loginName,
+                               HttpServletResponse response){
+
+        Member member = memberService.findMember(loginName);
+        memberService.withdraw(member);
+
+        // 세션만료 - 다시 로그인
+        Cookie nameCookie = new Cookie("loginName", null);
+        nameCookie.setMaxAge(0);
+        nameCookie.setPath("/");
+        response.addCookie(nameCookie);
+
+        return "redirect:/";
+    }
+
 
 
 

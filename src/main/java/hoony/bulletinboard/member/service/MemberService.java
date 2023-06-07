@@ -85,6 +85,7 @@ public class MemberService {
 
     // 비밀번호 수정
     public void modifyPassword(Member member){
+//        System.out.println("Service 에서 처리 >> " + member.getName() + "의 수정할 비밀번호 " + member.getPassword());
         memberRepository.update(member);
     }
 

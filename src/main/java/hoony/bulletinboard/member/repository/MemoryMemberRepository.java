@@ -30,8 +30,12 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public Member update(Member member) { // 수정 - 비밀번호 only
-        Member getMember = memory.get(member.getName());
-        getMember.setPassword(getMember.getPassword());
+//        Member getMember = memory.get(member.getName());
+//        getMember.setPassword(getMember.getPassword());
+        // 왜 안되지? 주소값이 다른가?
+
+//        memory.remove(member.getName());
+        memory.put(member.getName(), member);
         return member;
     }
 
