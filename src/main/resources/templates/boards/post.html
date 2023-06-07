@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Post 상세 페이지</title>
 </head>
 <body>
 
-<h1>게시판</h1>
-
-<a href="/">메인 페이지</a> <a href="/boards/new">글 쓰기</a>
+<a href="/">메인 페이지</a>
+<a href="/boards">게시판</a>
+<br>
+<a href="">post 수정</a>
+<a href="">post 삭제</a>
 <br><br>
+
 
 <div class="container">
     <div>
@@ -19,19 +22,20 @@
                 <th>글번호</th>
                 <th>제목</th>
                 <th>작성자</th>
-<!--                <th>내용</th>-->
-<!--                <th>사진</th>-->
+                <th>내용</th>
+                <th>사진</th>
                 <th>작성시간</th>
             </tr>
             </thead>
+
             <tbody>
-            <tr th:each="post : ${posts}">
+            <tr>
 
                 <td th:text="${post.getPostId()}"></td>
-<!--                <td th:text="${post.getTitle()}"></td>-->
-                <td><a th:href="@{'/boards/' + ${post.getPostId()}}"><span th:text="${post.getTitle()}"></span></a></td>
+                <td th:text="${post.getTitle()}"></td>
                 <td th:text="${post.getAuthor()}"></td>
-<!--                <td th:text="${post.getContent()}"></td>-->
+                <td th:text="${post.getContent()}"></td>
+                <td th:text="${post.getPhotoURL()}"></td>
                 <td th:text="${post.getCreationTime()}"></td>
 
 
@@ -42,8 +46,6 @@
 
 
 </div> <!-- /container -->
-
-
 
 </body>
 </html>

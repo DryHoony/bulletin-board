@@ -1,22 +1,23 @@
 package hoony.bulletinboard.board.repository;
 
-import hoony.bulletinboard.board.domain.Article;
+import hoony.bulletinboard.board.domain.Post;
 
 import java.util.List;
 
 public interface BoardRepository {
 
     // CRUD
-    // Article(writer, title, text) //ver1 기준
+    // Post(postId, author, title, content, photoURL, creationTime)
 
-    Article save(Article article);
-    List<Article> findAll();
+    Post save(Post post);
+    List<Post> findAll();
+    Post find(Long postId);
 
-    List<Article> findByWriter(String writer);
-    List<Article> findByTitle(String title);
+    List<Post> findByAuthor(String author);
+    List<Post> findByTitle(String title);
 
-    Article upgrade(Article article);
-    void delete(Article article);
+    Post update(Post post);
+    void delete(Post post);
 
 
 }
