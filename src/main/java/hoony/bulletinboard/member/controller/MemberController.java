@@ -2,10 +2,13 @@ package hoony.bulletinboard.member.controller;
 
 import hoony.bulletinboard.member.domain.Member;
 import hoony.bulletinboard.member.service.MemberService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,8 +55,6 @@ public class MemberController {
     }
 
 
-
-
     @GetMapping(value = "/members")
     public String memberList(Model model){ // 회원 목록 >> 회원목록 페이지로 이동
         List<Member> members = memberService.findMembers();
@@ -68,8 +69,10 @@ public class MemberController {
         return "members/loginForm";
     }
 
+
     @PostMapping(value = "/members/login")
-    public String login(@ModelAttribute MemberForm form) { // 따로 DTO 필요할까? - 보안문제 등이 있는지 확인, 로그인 기능 업그레이드시 수정
+    public String login(@ModelAttribute MemberForm form, HttpServletResponse response) { // 따로 DTO 필요할까?
+
         Member member = new Member(form.getName(), form.getPassword());
         boolean loginFlag = memberService.login(member);
 
@@ -77,16 +80,34 @@ public class MemberController {
         if (loginFlag){
 //            System.out.println("로그인 성공!");
             log.info("로그인 성공");
-            return "redirect:/?loginName="+member.getName();
+
+            // 세션 쿠키
+            Cookie nameCookie = new Cookie("loginName", member.getName());
+            nameCookie.setPath("/"); // 모든경로에서 사용
+            response.addCookie(nameCookie);
+
+
+            return "redirect:/";
+//            return "redirect:/?loginName="+member.getName();
         }
 
         System.out.println("로그인 실패!");
-        return "redirect:/"; // 메인 페이지로
+        return "redirect:/members/login"; // 로그인 페이지 그대로
 
 //        ra.addAttribute("memberLogin", memberLogin); // 데이터를 어떻게 보내야 할까?
 
     }
 
+    @GetMapping(value = "/members/logout")
+    public String logout(HttpServletResponse response) {
+        // 세션만료
+        Cookie nameCookie = new Cookie("loginName", null);
+        nameCookie.setMaxAge(0);
+        nameCookie.setPath("/");
+        response.addCookie(nameCookie);
+
+        return "redirect:/";
+    }
 
 
 
