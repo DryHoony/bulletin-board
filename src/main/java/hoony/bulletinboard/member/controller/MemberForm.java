@@ -2,6 +2,7 @@ package hoony.bulletinboard.member.controller;
 
 public class MemberForm {
     // DTO
+    // memberId 필드 없음
 
     private String name;
     private String password;

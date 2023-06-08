@@ -8,15 +8,16 @@
             <thead>
             <tr>
 <!--                <th>#</th>-->
+                <th>Id</th>
                 <th>이름</th>
                 <th>비밀번호</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="member : ${members}">
-<!--                <td th:text="${member.id}"></td>-->
-                <td th:text="${member.name}"></td>
-                <td th:text="${member.password}"></td>
+                <td th:text="${member.getMemberId()}"></td>
+                <td th:text="${member.getName()}"></td>
+                <td th:text="${member.getPassword()}"></td>
             </tr>
             </tbody>
         </table>

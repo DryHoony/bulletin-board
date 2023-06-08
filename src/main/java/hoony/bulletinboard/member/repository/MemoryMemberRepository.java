@@ -5,14 +5,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<String, Member>memory = new HashMap<>();
     // 추후 동시성 문제 고려! - ConcurrentHashMap, AtomicLong 사용 고려
+    private static long sequence = 0L;
 
     @Override
     public Member save(Member member) { // 추가
+        member.setMemberId(++sequence);
         memory.put(member.getName(), member);
         return member;
     }

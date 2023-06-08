@@ -33,6 +33,19 @@ public class MemoryBoardRepository implements BoardRepository{
         return memory.get(postId);
     }
 
+    @Override
+    public Post update(Post post) {
+        memory.put(post.getPostId(), post);
+        return null;
+    }
+
+    @Override
+    public void delete(Post post) {
+        memory.remove(post.getPostId());
+    }
+
+
+
 
     ///////////////////////////////////////////////////////////////
 
@@ -50,14 +63,5 @@ public class MemoryBoardRepository implements BoardRepository{
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Post update(Post post) {
-        memory.put(post.getPostId(), post);
-        return null;
-    }
 
-    @Override
-    public void delete(Post post) {
-        memory.remove(post.getPostId());
-    }
 }

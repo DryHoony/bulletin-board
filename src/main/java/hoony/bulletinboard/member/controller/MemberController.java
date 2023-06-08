@@ -125,7 +125,10 @@ public class MemberController {
 
 //        System.out.println("Controller 에서 받은 password = " + password);
 
-        Member member = new Member(loginName, password);
+
+
+        Member member = new Member(loginName, password); // 여기서 memberId 정보가 소실
+        member.setMemberId(memberService.findMember(loginName).getMemberId()); // 꾸역꾸역 추가
         memberService.modifyPassword(member);
 
         // 세션만료 - 다시 로그인
@@ -141,7 +144,7 @@ public class MemberController {
     public String deleteMember(@CookieValue(name = "loginName") String loginName,
                                HttpServletResponse response){
 
-        Member member = memberService.findMember(loginName);
+        Member member = memberService.findMember(loginName); // 회원인지 확인 포함
         memberService.withdraw(member);
 
         // 세션만료 - 다시 로그인
