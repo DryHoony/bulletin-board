@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -37,21 +38,26 @@ public class MemoryBoardRepository implements BoardRepository{
 
     @Override
     public List<Post> findByAuthor(String author) {
-        return null;
+        return memory.values().stream()
+                .filter(post -> post.getAuthor().equals(author))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Post> findByTitle(String title) {
-        return null;
+        return memory.values().stream()
+                .filter(post -> post.getTitle().contains(title))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Post update(Post post) {
+        memory.put(post.getPostId(), post);
         return null;
     }
 
     @Override
     public void delete(Post post) {
-
+        memory.remove(post.getPostId());
     }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Post</title>
+</head>
+<body>
+<h1>Edit Post</h1>
+<a href="/boards">게시판</a><br>
+
+<form action="/boards/edit" method="POST">
+
+    <div>
+        <label for="author">작성자 이름:</label>
+        <input type="text" id="author" name="author" th:value="${post.getAuthor()}" readonly>
+    </div>
+
+    <div>
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required th:value="${post.getTitle()}">
+    </div>
+
+    <div>
+        <label for="content">내용:</label>
+        <textarea id="content" name="content" rows="4" cols="50" required th:value="${post.getContent()}"></textarea>
+    </div>
+
+    <div>
+        <label for="photoURL">Photo URL:</label>
+        <input type="text" id="photoURL" name="photoURL" th:value="${post.getPhotoURL()}">
+    </div>
+
+<!--  postId, creationTime  -->
+    <input type="hidden" name="postId" th:value="${post.getPostId()}">
+    <input type="hidden" name="creationTime" th:value="${post.getCreationTime()}">
+
+    <button type="submit">수정</button>
+</form>
+</body>
+</html>

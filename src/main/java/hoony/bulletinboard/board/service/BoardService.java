@@ -19,14 +19,17 @@ public class BoardService {
         this.boardRepository = boardRepository;
 
         // 기본 글 테스트용
-        Post post0 = new Post(null, "작자미상", "무제", "제발 단 한~번이라도우", "사진경로", LocalDateTime.now());
+        Post post0 = new Post(null, "a", "무제", "제발 단 한~번이라도우", "사진경로", LocalDateTime.now());
         boardRepository.save(post0);
 
     }
 
     // 1.글 작성
-    public void createPost(Post post){
-        boardRepository.save(post);
+    public Post createPost(Post post){
+        post.setCreationTime(LocalDateTime.now());
+        Post postSaved =  boardRepository.save(post);
+
+        return postSaved;
     }
 
     // 2. 글전체 조회
@@ -46,21 +49,26 @@ public class BoardService {
 
     // 3. 글 검색 by 작성자
     public List<Post> searchPostsByAuthor(String author){
-        return null;
+        return boardRepository.findByAuthor(author);
     }
 
     // 4. 글 검색 by 제목 >> '검색어'를 포함하는 제목을 모두 찾기
     public List<Post> searchPostsByTitle(String title){
-        return null;
+        return boardRepository.findByTitle(title);
     }
 
 
     // 5. 글 수정
     public void updatePost(Post post){
+        boardRepository.update(post);
     }
 
     // 6. 글 삭제
     public void deletePost(Long postId){
+        Post post = boardRepository.find(postId);
+        if(post != null){
+            boardRepository.delete(post);
+        }
     }
 
 
